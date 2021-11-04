@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.5.6</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+    <groupId>com.xuegao</groupId>
+    <artifactId>xuegao-spring-docker</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <name>xuegao-spring-docker</name>
+    <description>Demo project for Spring Boot</description>
+
+    <properties>
+        <java.version>1.8</java.version>
+        <!-- 仓库地域 -->
+        <docker.region>registry.cn-shenzhen.aliyuncs.com</docker.region>
+        <!-- 仓库命名空间 -->
+        <docker.namespace>kind-demo</docker.namespace>
+        <!-- 仓库名称 -->
+        <docker.registry>xuegao-spring-boot-kind</docker.registry>
+        <docker.username>tb280830171ali云</docker.username>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.5.6</version>
+                <configuration>
+                    <image>
+                        <name>${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}</name>
+                        <!-- 执行完build 自动push -->
+                        <publish>true</publish>
+                    </image>
+                    <!--配置构建宿主机信息，本机不用配置-->
+                    <docker>
+                        <host>${docker.region}</host>
+                        <!--如果使用https协议需要设置为true-->
+                        <tlsVerify>false</tlsVerify>
+                        <publishRegistry>
+                            <username>tb280830171ali云</username>
+                            <password>qq23612244896</password>
+                            <url>${docker.region}</url>
+                        </publishRegistry>
+                    </docker>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
