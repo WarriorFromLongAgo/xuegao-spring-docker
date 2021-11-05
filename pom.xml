@@ -42,30 +42,69 @@
 
     <build>
         <plugins>
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--                <version>2.5.6</version>-->
+<!--                <configuration>-->
+<!--                    <image>-->
+<!--                        <name>${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}</name>-->
+<!--                        &lt;!&ndash; 执行完build 自动push &ndash;&gt;-->
+<!--                        <publish>true</publish>-->
+<!--                    </image>-->
+<!--                    &lt;!&ndash;配置构建宿主机信息，本机不用配置&ndash;&gt;-->
+<!--                    <docker>-->
+<!--                        <host>${docker.region}</host>-->
+<!--                        &lt;!&ndash;如果使用https协议需要设置为true&ndash;&gt;-->
+<!--                        <tlsVerify>false</tlsVerify>-->
+<!--                        <publishRegistry>-->
+<!--                            <username>tb280830171ali云</username>-->
+<!--                            <password>qq23612244896</password>-->
+<!--                            <url>${docker.region}</url>-->
+<!--                        </publishRegistry>-->
+<!--                    </docker>-->
+<!--                </configuration>-->
+<!--            </plugin>-->
+            <!-- Jib插件 -->
             <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.5.6</version>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.1.4</version>
                 <configuration>
-                    <image>
-                        <name>${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}</name>
-                        <!-- 执行完build 自动push -->
-                        <publish>true</publish>
-                    </image>
-                    <!--配置构建宿主机信息，本机不用配置-->
-                    <docker>
-                        <host>${docker.region}</host>
-                        <!--如果使用https协议需要设置为true-->
-                        <tlsVerify>false</tlsVerify>
-                        <publishRegistry>
-                            <username>tb280830171ali云</username>
-                            <password>qq23612244896</password>
-                            <url>${docker.region}</url>
-                        </publishRegistry>
-                    </docker>
+                    <!-- 拉取所需的基础镜像 - 这里用于运行springboot项目 -->
+                    <from>
+                        <image>openjdk:alpine</image>
+                    </from>
+                    <!-- 最后生成的镜像配置 -->
+                    <to>
+                        <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
+                        <image>${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}</image>
+                        <!-- 镜像版本号 -->
+                        <!--<tags>-->
+                        <!--<tag>v1</tag>-->
+                        <!--</tags>-->
+                        <auth>
+                            <!--在阿里云上的账号和密码-->
+                            <username>tb280830171ali云</username>-->
+                            <password>qq23612244896</password>-->
+                        </auth>
+                    </to>
+                    <container>
+                        <ports>
+                            <!--指定镜像端口 , 这里没用 docfile 的操作-->
+                            <port>9000</port>
+                        </ports>
+                    </container>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
-
         </plugins>
     </build>
 
