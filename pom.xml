@@ -66,52 +66,53 @@
             <!--                </configuration>-->
             <!--            </plugin>-->
             <!-- Jib插件 -->
-<!--            <plugin>-->
-<!--                <groupId>com.google.cloud.tools</groupId>-->
-<!--                <artifactId>jib-maven-plugin</artifactId>-->
-<!--                <version>3.1.4</version>-->
-<!--                <configuration>-->
-<!--                    <container>-->
-<!--                        <mainClass>com.xuegao.xuegaospringdocker.XuegaoSpringDockerApplication</mainClass>-->
-<!--                        <ports>-->
-<!--                            &lt;!&ndash;指定镜像端口 , 这里没用 docfile 的操作&ndash;&gt;-->
-<!--                            <port>9000</port>-->
-<!--                        </ports>-->
-<!--                        &lt;!&ndash;使用该参数将镜像的创建时间与系统时间对其&ndash;&gt;-->
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.1.4</version>
+                <configuration>
+                    <container>
+                        <mainClass>com.xuegao.xuegaospringdocker.XuegaoSpringDockerApplication</mainClass>
+                        <ports>
+                            <!--指定镜像端口 , 这里没用 docfile 的操作-->
+                            <port>9000</port>
+                        </ports>
+                        <!--使用该参数将镜像的创建时间与系统时间对其-->
 <!--                        <useCurrentTimestamp>true</useCurrentTimestamp>-->
-<!--                    </container>-->
-<!--                    &lt;!&ndash;from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字&ndash;&gt;-->
-<!--                    <from>-->
-<!--                        &lt;!&ndash;使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8&ndash;&gt;-->
-<!--                        <image>openjdk:8u212-jdk-stretch</image>-->
-<!--                    </from>-->
-<!--                    &lt;!&ndash; 最后生成的镜像配置 &ndash;&gt;-->
-<!--                    <to>-->
-<!--                        &lt;!&ndash; push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` &ndash;&gt;-->
-<!--                        <image>-->
-<!--                            ${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}-->
-<!--                        </image>-->
-<!--                        &lt;!&ndash; 镜像版本号 &ndash;&gt;-->
-<!--                        &lt;!&ndash;<tags>&ndash;&gt;-->
-<!--                        &lt;!&ndash;<tag>v1</tag>&ndash;&gt;-->
-<!--                        &lt;!&ndash;</tags>&ndash;&gt;-->
-<!--                        <auth>-->
-<!--                            &lt;!&ndash;在阿里云上的账号和密码&ndash;&gt;-->
-<!--                            <username>18000855903</username>&ndash;&gt;-->
-<!--                            <password>qq23612244896</password>&ndash;&gt;-->
-<!--                        </auth>-->
-<!--                    </to>-->
-<!--&lt;!&ndash;                    <allowInsecureRegistries>true</allowInsecureRegistries>&ndash;&gt;-->
-<!--                </configuration>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <phase>package</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>build</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--                </executions>-->
-<!--            </plugin>-->
+                    </container>
+                    <!--from节点用来设置镜像的基础镜像，相当于Docerkfile中的FROM关键字-->
+                    <from>
+                        <!--使用openjdk官方镜像，tag是8-jdk-stretch，表示镜像的操作系统是debian9,装好了jdk8-->
+                        <image>openjdk:8u212-jdk-stretch</image>
+                    </from>
+                    <!-- 最后生成的镜像配置 -->
+                    <to>
+                        <!-- push到阿里云镜像仓库，如果是其它镜像仓库，将下面地址替换掉即可，ex: `Docker Hub` 的 `docker.io/zhengqing/xxx` -->
+                        <image>
+                            ${docker.region}/${docker.namespace}/${docker.registry}/${project.artifactId}:${project.version}
+                        </image>
+                        <!-- 镜像版本号 -->
+                        <!--<tags>-->
+                        <!--<tag>v1</tag>-->
+                        <!--</tags>-->
+                        <auth>
+                            <!--在阿里云上的账号和密码-->
+                            <username>18000855903</username>-->
+                            <password>qq23612244896</password>-->
+                        </auth>
+                    </to>
+                    <!--用没配置安全认证的registry-->
+                    <allowInsecureRegistries>true</allowInsecureRegistries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>build</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
