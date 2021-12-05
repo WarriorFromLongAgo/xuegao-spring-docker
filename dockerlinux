@@ -1,5 +1,5 @@
-docker build -f dockerfile1 -t demo1:1.0 .
-docker run -itd --name xuegao-springboot -p 10000:8080 219508153580
+# docker build -f dockerfile1 -t demo1:1.0 .
+# docker run -itd --name xuegao-springboot -p 10000:8080 219508153580
 
 
 FROM maven:3.8.3-openjdk-8 as build
@@ -22,8 +22,8 @@ COPY --from=build xuegao-spring-docker/target/xuegao-spring-docker-0.0.1-SNAPSHO
 CMD ["java","-jar","app.jar"]
 
 
-进入容器内部
-docker run -it --entrypoint=/bin/bash 021fbe4b4b91
-docker exec -it 666927b25d2f /bin/bash
+# 进入容器内部
+# docker run -it --entrypoint=/bin/bash 021fbe4b4b91
+# docker exec -it 666927b25d2f /bin/bash
 
 
